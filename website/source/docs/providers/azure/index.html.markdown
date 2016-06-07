@@ -1,14 +1,21 @@
 ---
 layout: "azure"
-page_title: "Provider: Azure"
+page_title: "Provider: Azure Service Management"
 sidebar_current: "docs-azure-index"
 description: |-
   The Azure provider is used to interact with the many resources supported by Azure. The provider needs to be configured with a publish settings file and optionally a subscription ID before it can be used.
 ---
 
-# Azure Provider
+# Azure Service Management Provider
 
-The Azure provider is used to interact with the many resources supported
+~> **NOTE:** The Azure Service Management Provider is no longer being actively
+developed by HashiCorp employees. It continues to be supported by the
+community. We recommend using the Azure Resource Manager based [Microsoft
+Azure Provider][arm] instead if possible.
+
+[arm]: /docs/providers/azurerm/index.html
+
+The Azure Service Management Provider is used to interact with the many resources supported
 by Azure. The provider needs to be configured with a [publish settings
 file](https://manage.windowsazure.com/publishsettings) and optionally a
 subscription ID before it can be used.
