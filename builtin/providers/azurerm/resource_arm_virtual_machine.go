@@ -207,8 +207,7 @@ func resourceArmVirtualMachine() *schema.Resource {
 					Schema: map[string]*schema.Schema{
 						"computer_name": {
 							Type:     schema.TypeString,
-							Optional: true,
-							Computed: true,
+							Required: true,
 						},
 
 						"admin_username": {
@@ -798,9 +797,11 @@ func expandAzureRmVirtualMachineOsProfile(d *schema.ResourceData) (*compute.OSPr
 
 	adminUsername := osProfile["admin_username"].(string)
 	adminPassword := osProfile["admin_password"].(string)
+	computerName := osProfile["computer_name"].(string)
 
 	profile := &compute.OSProfile{
 		AdminUsername: &adminUsername,
+		ComputerName:  &computerName,
 	}
 
 	if adminPassword != "" {
@@ -834,9 +835,6 @@ func expandAzureRmVirtualMachineOsProfile(d *schema.ResourceData) (*compute.OSPr
 		}
 	}
 
-	if v := osProfile["computer_name"].(string); v != "" {
-		profile.ComputerName = &v
-	}
 	if v := osProfile["custom_data"].(string); v != "" {
 		profile.CustomData = &v
 	}
