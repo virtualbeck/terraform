@@ -22,8 +22,6 @@ func TestAccAWSDynamoDbTable_importBasic(t *testing.T) {
 				ResourceName:      resourceName,
 				ImportState:       true,
 				ImportStateVerify: true,
-				//ImportStateVerifyIgnore: []string{
-				//	"description"},
 			},
 		},
 	})
