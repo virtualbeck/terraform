@@ -238,6 +238,20 @@ func TestScriptPath(t *testing.T) {
 	}
 }
 
+func TestScriptPath_randSeed(t *testing.T) {
+	// Pre GH-4186 fix, this value was the deterministic start the pseudorandom
+	// chain of unseeded math/rand values for Int31().
+	staticSeedPath := "/tmp/terraform_1298498081.sh"
+	c, err := New(&terraform.InstanceState{})
+	if err != nil {
+		t.Fatalf("err: %s", err)
+	}
+	path := c.ScriptPath()
+	if path == staticSeedPath {
+		t.Fatalf("rand not seeded! got: %s", path)
+	}
+}
+
 const testClientPrivateKey = `-----BEGIN RSA PRIVATE KEY-----
 MIIEpQIBAAKCAQEAxOgNXOJ/jrRDxBZTSk2X9otNy9zcpUmJr5ifDi5sy7j2ZiQS
 beBt1Wf+tLNWis8Cyq06ttEvjjRuM75yucyD6GrqDTXVCSm4PeOIQeDhPhw26wYZ

@@ -143,3 +143,17 @@ func TestScriptPath(t *testing.T) {
 		}
 	}
 }
+
+func TestScriptPath_randSeed(t *testing.T) {
+	// Pre GH-4186 fix, this value was the deterministic start the pseudorandom
+	// chain of unseeded math/rand values for Int31().
+	staticSeedPath := "C:/Temp/terraform_1298498081.cmd"
+	c, err := New(&terraform.InstanceState{})
+	if err != nil {
+		t.Fatalf("err: %s", err)
+	}
+	path := c.ScriptPath()
+	if path == staticSeedPath {
+		t.Fatalf("rand not seeded! got: %s", path)
+	}
+}
